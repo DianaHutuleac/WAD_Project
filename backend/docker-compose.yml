@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  db:
+    image: "postgres:9.6-alpine"
+    container_name: db
+    restart: always
+
+    ports:
+      - 5432:5432
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    environment:
+      - POSTGRES_DB=f1_merch
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+
+
+  f1_merch:
+    build: ./
+    container_name: f1_merch
+    environment:
+      - DB_SERVER:db
+      - POSTGRES_DB=f1_merch
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 8080:8080 # Forward the exposed port 8080 on the container to port 8080 on the host machine
+
+    depends_on:
+      - db
+
+
+
+volumes:
+  postgres_data:
