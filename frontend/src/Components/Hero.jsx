@@ -10,7 +10,8 @@ export default function Hero() {
                         <h3 className="font-formulafont-regular text-formula-white ">Here you can find any merch from all the teams.</h3>
                     </div>
                     <div>
-                        <Button 
+                        <Button
+                        buttonHref={"/products"} 
                         buttonColor={"bg-formula-red"}
                         buttonLabel={"SHOP NOW"}
                         buttonPadding={"px-10 py-4"}

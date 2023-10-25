@@ -1,7 +1,9 @@
-export default function TeamContent() {
+export default function TeamContent(props) {
     return(
-        <div className="px-12 py-4 bg-formula-grey-second">
-                test
-        </div>
+        <a href={props.data.href}>
+            <div key={props.data.id} className="rounded box-content w-auto h-28 bg-formula-grey-second flex items-center justify-center grayscale hover:grayscale-0  ease-out transition-all duration-1000">
+                <img className="h-16 w-auto p-2 " src={`../../${props.data.imgSrc}`} alt={props.data.teamName} />
+            </div>
+        </a>
     )
 }

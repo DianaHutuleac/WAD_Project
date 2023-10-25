@@ -5,15 +5,15 @@ import FormulaLogo from "../SVG/formula1";
  /* TODO: Correctly add the href to corespond to each page */
 const nav = {
     pages: [
-        { id: 1, name: 'All Products', href: '#' },
-        { id: 2, name: 'Teams', href: '#' },
-        { id: 3, name: 'Categories', href: '#' }
+        { id: 1, name: 'All Products', href: '/products' },
+        { id: 2, name: 'Teams', href: '/teams' },
+        { id: 3, name: 'Categories', href: '/categories' }
     ]
 }
 
 export default function NavbarComponent() {
     return(
-        <div className="bg-formula-red fixed w-screen">
+        <div className="bg-formula-red fixed w-screen z-50">
             <header className="relative">
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="h-24 flex items-center justify-between">
@@ -37,6 +37,7 @@ export default function NavbarComponent() {
 
                         <div className="flex items-center justify-center gap-x-5 mx-13">
                             <Button
+                            buttonHref={"/login"}
                             buttonColor={"bg-formula-grey"}
                             buttonLabel={"LOGIN"}
                             buttonPadding={"px-7 py-2"}
@@ -45,6 +46,7 @@ export default function NavbarComponent() {
                             labelSize={"text-xs"}
                             />
                             <Button
+                            buttonHref={"/register"}
                             buttonColor={"bg-formula-white"}
                             buttonLabel={"REGISTER"}
                             buttonPadding={"px-7 py-2"}

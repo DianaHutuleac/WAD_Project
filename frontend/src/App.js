@@ -1,14 +1,27 @@
 import './App.css';
-import Hero from './Components/Hero';
-import NavbarComponent from './Components/Navbar';
-import Teams from './Components/Teams';
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from './Pages/Home';
+import Products from './Pages/Products';
+import TeamPage from './Pages/TeamPage';
+import Categories from './Pages/Categories';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
 
 function App() {
   return (
-    <div className="App">
-        <NavbarComponent />
-        <Hero />
-        <Teams />
+    <div className="App overflow-hidden">
+      <BrowserRouter>
+      <Routes>
+      <Route path = "products" element={<Products />} />
+      <Route path = "products/:id" element={<TeamPage />} />
+      <Route path = "teams" element={<TeamPage />} />
+      <Route path = "categories" element={<Categories />} />
+      <Route path = "login" element={<Login />} />
+      <Route path = "register" element={<Register />} />
+      <Route path = "/" element = {<Home/>}/>
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
