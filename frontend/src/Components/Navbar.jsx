@@ -29,7 +29,7 @@ export default function NavbarComponent() {
                         
                         <div className="flex items-center justify-center font-formulafont-regular text-formula-white h-full ">
                         {nav.pages.map((page) => (
-                            <div key={page.id} className="hover:bg-red-800 ease-out transition-colors flex">
+                            <div key={page.id} className="hover:bg-formula-grey ease-out transition-colors flex">
                                 <a href={page.href} className="py-9 px-10"> {page.name} </a>
                             </div>
                         ))}

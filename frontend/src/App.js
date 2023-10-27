@@ -7,6 +7,7 @@ import TeamPage from './Pages/TeamPage';
 import Categories from './Pages/Categories';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
+import ProductPage from './Pages/ProductPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
       <Routes>
       <Route path = "products" element={<Products />} />
+      <Route path = "product/:id" element={<ProductPage />} />
       <Route path = "products/:id" element={<TeamPage />} />
       <Route path = "teams" element={<TeamPage />} />
       <Route path = "categories" element={<Categories />} />
