@@ -52,13 +52,6 @@ public class WebSecurityConfig implements WebMvcConfigurer  {
     private CustomLogoutHandler logoutHandler;
 
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET", "POST", "PATCH", "PUT", "OPTIONS", "DELETE")
-                .allowCredentials(true);
-    }
 
 
 
@@ -78,8 +71,22 @@ public class WebSecurityConfig implements WebMvcConfigurer  {
         return auth.getAuthenticationManager();
     }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:3000")
+                .allowedMethods("GET", "POST", "PATCH", "PUT", "OPTIONS", "DELETE")
+                .allowCredentials(true);
+    }
 
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeHttpRequests().anyRequest().permitAll().and().formLogin().loginProcessingUrl("/api/login").permitAll();
 
+        return http.build();
+    }
+
+    /*
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.
@@ -111,6 +118,8 @@ public class WebSecurityConfig implements WebMvcConfigurer  {
         return http.build();
     }
 
+
+     */
 
 
 

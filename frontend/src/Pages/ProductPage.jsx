@@ -35,7 +35,7 @@ export default function ProductPage() {
                        
                     </div>
                     <Button
-                    buttonHref={"#"} 
+                    buttonHref={"/cart"} 
                     buttonColor={"bg-formula-red"}
                     buttonLabel={"Add To Cart"}
                     buttonPadding={"px-32 py-3"}
