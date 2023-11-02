@@ -1,6 +1,6 @@
 import Button from "../Elements/Buttons";
 import FormulaLogo from "../SVG/formula1";
-
+import { Link, withRouter  } from 'react-router-dom';
 
  /* TODO: Correctly add the href to corespond to each page */
 const nav = {
@@ -30,7 +30,7 @@ export default function NavbarComponent() {
                         <div className="flex items-center justify-center font-formulafont-regular text-formula-white h-full ">
                         {nav.pages.map((page) => (
                             <div key={page.id} className="hover:bg-formula-grey ease-out transition-colors flex">
-                                <a href={page.href} className="py-9 px-10"> {page.name} </a>
+                                <Link to={page.href} className="py-9 px-10"> {page.name} </Link>
                             </div>
                         ))}
                         </div>

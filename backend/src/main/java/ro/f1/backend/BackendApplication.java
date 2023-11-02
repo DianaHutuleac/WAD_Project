@@ -19,6 +19,7 @@ public class BackendApplication implements CommandLineRunner {
     @Override
     public void run(String... arg) throws Exception {
 //    storageService.deleteAll();
+        System.out.println("test");
         storageService.init();
     }
 

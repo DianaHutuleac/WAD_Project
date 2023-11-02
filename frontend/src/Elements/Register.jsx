@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
+
 
 export default function RegisterElement() {
 
@@ -8,6 +10,7 @@ export default function RegisterElement() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
 
     const REGISTER_URI = 'http://localhost:8080/api/register';
 
@@ -26,7 +29,8 @@ export default function RegisterElement() {
                 .then(response => {
                     console.log(response);
                     if (response.status == 200) {
-                        window.location.href = "/login?message=success";
+                        navigate('/login?message=success');
+                       
                     }
                 })
                 .catch(err => console.log(err))

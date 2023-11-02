@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+@font-face {
+  font-family: 'FormulaWide';
+  src: url(../public/fonts/Formula1-Black.ttf), 
+       url(../public/fonts/Formula1-Bold_web.ttf),
+       url(../public/fonts/Formula1-Bold-4.ttf),
+       url(../public/fonts/Formula1-Italic.ttf),
+       url(../public/fonts/Formula1-Regular-1.ttf),
+       url(../public/fonts/Formula1-Wide.ttf);
+}
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;600&display=swap');
+
+@font-face {
+  font-family: 'FormulaWide';
+  src: url(../public/fonts/Formula1-Wide.ttf);
+}
+
+@font-face {
+  font-family: 'FormulaRegular';
+  src: url(../public/fonts/Formula1-Regular-1.ttf);
+}
+
+@font-face {
+  font-family: 'FormulaBold';
+  src: url(../public/fonts/Formula1-Bold_web.ttf);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

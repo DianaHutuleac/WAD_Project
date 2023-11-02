@@ -31,7 +31,7 @@ export default function LoginElement() {
                 .then(response => {
                     console.log(response);
                     if (response.status == 200) {
-                        window.location.href = "/home";
+                        window.location.href = "/";
                     }
                 })
                 .catch(err => console.log(err))

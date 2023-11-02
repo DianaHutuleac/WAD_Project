@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,27 +28,20 @@ public class ImageController {
     @Autowired
     FilesStorageService storageService;
 
+    /*
 
     @GetMapping("/images/new")
     public String newImage(Model model) {
         return "upload_form";
     }
+    */
+
 
     @PostMapping("/images/upload")
-    public String uploadImage(Model model, @RequestParam("file") MultipartFile file) {
-        String message = "";
+    public ResponseEntity<String> uploadImage( @RequestParam("file") MultipartFile file) {
 
-        try {
-            storageService.save(file);
 
-            message = "Uploaded the image successfully: " + file.getOriginalFilename();
-            model.addAttribute("message", message);
-        } catch (Exception e) {
-            message = "Could not upload the image: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
-            model.addAttribute("message", message);
-        }
-
-        return "upload_form";
+        return  new ResponseEntity<String>(storageService.save(file), HttpStatus.OK);
     }
 
     @GetMapping("/images")

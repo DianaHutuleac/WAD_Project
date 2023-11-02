@@ -21,14 +21,20 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     @Override
     public void init() {
         try {
-            Files.createDirectories(root);
+
+            if (!Files.exists(root)){
+                Files.createDirectories(root);
+                System.out.println("created");
+            } else {
+                System.out.println("sal");
+            }
         } catch (IOException e) {
             throw new RuntimeException("Could not initialize folder for upload!");
         }
     }
 
     @Override
-    public void save(MultipartFile file) {
+    public String save(MultipartFile file) {
         try {
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
         } catch (Exception e) {
@@ -38,6 +44,8 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 
             throw new RuntimeException(e.getMessage());
         }
+
+        return "SUCCESS";
     }
 
     @Override

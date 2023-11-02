@@ -1,3 +1,4 @@
+import { Link, withRouter  } from 'react-router-dom';
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
@@ -96,7 +97,7 @@ export default function Cart() {
                                   <div>
                                     <div className="flex justify-between text-base font-formulafont-regular text-gray-900">
                                       <h3>
-                                        <a href={product.href}>{product.name}</a>
+                                        <Link to={product.href}>{product.name}</Link>
                                       </h3>
                                       <p className="ml-4">{product.price}</p>
                                     </div>
@@ -129,12 +130,12 @@ export default function Cart() {
                       </div>
                       <p className="mt-0.5 text-sm font-formulafont-regular text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
-                        <a
-                          href="/checkout"
+                        <Link
+                          to="/checkout"
                           className="flex items-center justify-center rounded-md border border-transparent bg-formula-red px-6 py-3 text-base font-formulafont-regular text-white shadow-sm hover:bg-formula-red"
                         >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm font-formulafont-regular text-gray-500">
                         <p>
