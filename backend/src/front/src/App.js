@@ -17,6 +17,8 @@ import Cart from './Pages/Cart';
 import Checkout from './Pages/Checkout';
 import AuthContext from "./context";
 import AuthService from "./Services/AuthentificationService"
+import TeamChoose from './Pages/TeamChoose';
+
 
 function App() {
     const [ auth , setAuth ] = React.useState( false);
@@ -39,10 +41,11 @@ function App() {
       <Route path = "product/:id" element={<ProductPage />} />
       <Route path = "products/:id" element={<TeamPage />} />
       <Route path = "cart" element={<Cart />} />
-      <Route path = "teams" element={<TeamPage />} />
+      <Route path = "teams" element={<TeamChoose />} />
       <Route path = "categories" element={<Categories />} />
       <Route path = "login" element={<Login />} />
       <Route path = "register" element={<Register />} />
+      <Route path="cart" element={<Cart />}  />
       <Route path = "checkout" element={<Checkout />} />
       <Route path = "admin" element={<Admin/>} />
       <Route path ="admin/orders" element={<Orders />} />

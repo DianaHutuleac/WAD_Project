@@ -6,15 +6,15 @@ import { useNavigate } from 'react-router-dom';
 const products = [
   {
     id: 1,
-    name: 'Throwback Hip Bag',
+    name: 'Tshirt',
     href: '#',
-    color: 'Salmon',
-    price: '$90.00',
+    color: 'REDBULL',
+    price: '€ 48,75',
     quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+    imageSrc: 'https://www.fuelforfans.com/dw/image/v2/BDWJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dwc4635b27/images/large/701224599001_pp_01_redbull.jpg',
     imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
   },
-  {
+  /*{
     id: 2,
     name: 'Medium Stuff Satchel',
     href: '#',
@@ -24,7 +24,7 @@ const products = [
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
     imageAlt:
       'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },
+  },*/
   // More products...
 ]
 
@@ -125,7 +125,7 @@ export default function Cart() {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-formulafont-regular text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>€ 48,75</p>
                       </div>
                       <p className="mt-0.5 text-sm font-formulafont-regular text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">

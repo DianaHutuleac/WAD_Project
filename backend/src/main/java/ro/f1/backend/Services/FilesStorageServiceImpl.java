@@ -13,10 +13,11 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
+import ro.f1.backend.Controllers.ImageController;
 
 @Service
 public class FilesStorageServiceImpl implements FilesStorageService {
-    private final Path root = Paths.get("./uploads");
+    private final Path root = Paths.get("/var/lib/data/uploads");
 
     @Override
     public void init() {
@@ -37,6 +38,8 @@ public class FilesStorageServiceImpl implements FilesStorageService {
     public String save(MultipartFile file) {
         try {
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+
+            return file.getOriginalFilename();
         } catch (Exception e) {
             if (e instanceof FileAlreadyExistsException) {
                 throw new RuntimeException("A file of that name already exists.");
@@ -44,8 +47,6 @@ public class FilesStorageServiceImpl implements FilesStorageService {
 
             throw new RuntimeException(e.getMessage());
         }
-
-        return "SUCCESS";
     }
 
     @Override

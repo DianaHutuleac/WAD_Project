@@ -1,15 +1,14 @@
 import NavbarComponent from "../Components/Navbar"
 import Teams from "../Components/Teams"
 import Footer from "../Components/Footer"
-import ProductsTeam from "../Components/ProductsTeam"
 
 
-export default function TeamPage(){
+export default function TeamChoose(){
     
     return (
         <>
         <NavbarComponent />
-        <ProductsTeam/>  
+        <Teams/>  
         <Footer />
         </>
 

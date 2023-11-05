@@ -28,9 +28,18 @@ public class Product {
     }
 
 
+    @SequenceGenerator(
+            name = "student_sequence",
+            sequenceName = "student_sequence",
+            allocationSize = 1
+    )
 
     @Id
-    Long id;
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "student_sequence"
+    )
+    private Long id;
     @Enumerated(EnumType.STRING)
 
     @Column(name = "team")

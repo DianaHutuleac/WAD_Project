@@ -2,33 +2,83 @@ import NavbarComponent from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import Button from "../Elements/Buttons";
 import DRS from "../SVG/drs";
+import ProductContent from "../Elements/ProductContent";
+import ArrowIcon from "../SVG/arrow";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import {Buffer} from "buffer";
+import React from "react";
+import { useState } from "react";
 export default function ProductPage() {
+    const location = useLocation();
+    const [pathName, setPathName] = useState(null) ;
+    
+
+    const [img, setImg] = useState()
+
+    const [total, setTotal] = useState( 0);
+    const [current, setCurrent ] = useState(0);
+    const [products, setProducts ] = useState([]);
+
+    React.useEffect(() => {
+
+        function timeout(delay){
+            return new Promise(res => setTimeout(res, delay));
+        }
+
+        if(location) {
+            let tmp = location.pathname.slice(location.pathname.lastIndexOf("/") , location.pathname.length) ;
+            setPathName(tmp.split("/").pop()) ;
+
+            
+               axios.get(`http://localhost:8080/api/v1/product/${tmp.split("/").pop()}`).then(response => {setProducts(response.data) 
+               axios.get(`http://localhost:8080/images/${response.data.d_image}`, {responseType: "arraybuffer"}).then(response => {setImg(Buffer.from(response.data, 'binary').toString('base64')) }).catch( err => console.log(err));
+          
+       
+       
+            }).catch( err => console.log(err))
+            
+           
+                
+
+
+                
+           
+        }
+
+   
+    }, [location])
+
+    console.log(img)
+
+
     return(
         <div>
         <NavbarComponent />
         <div className="max-w-7xl mx-auto py-40">
             <div className="grid grid-cols-3">
                 <div className=" col-span-2">
-                    <img className="max-h-[30rem] rounded-lg"src="../../redbull_beanie.jpg" />
+                    <img className="max-h-[30rem] rounded-lg" src={`data:image/*;base64,${img}`} />
 
                 </div>
 
                 <div className="flex flex-col gap-y-4">
                     <div className="">
-                        <p className="font-titilium font-semibold text-xl opacity-50">Red Bull Racing</p>
-                        <p className="font-titilium font-semibold text-md">Red Bull Essential Bobby Beanie</p>
+                        <p className="font-titilium font-semibold text-xl opacity-50">{products.a_team}</p>
+                        <p className="font-titilium font-semibold text-md">{products.b_clothestype}</p>
                     </div>
                     <div>
-                        <p className="font-titilium font-semibold text-formula-red text-md">EUR 130.00</p>
+                        <p className="font-titilium font-semibold text-formula-red text-md">EUR {products.e_price}.00</p>
                     </div>
                     <div>
-                        <p className="text-sm">Size: One Size</p>
-                        <p className="text-sm">Colour: Navy</p>
+                        <p className="text-sm">Size: {products.c_size}</p>
+                        
                     </div>
 
                     <div className="font-titilium font-semibold">
                         <ul className="list-inside list-disc">
-                        <li>Cuff beanie with bobble</li>
+                        <li>High Quality {products.a_team} {products.b_clothestype}</li>
                         <li>Team logo badge embroidered on the front</li>
                         <li>Material: 100% Acrylic</li>
                         </ul>

@@ -7,7 +7,9 @@ const nav = {
     pages: [
         { id: 1, name: 'All Products', href: '/admin/products' },
         { id: 2, name: 'Orders', href: '/admin/orders' },
-        { id: 3, name: 'Add Products', href: '/admin/addproducts' }
+        { id: 3, name: 'Add Products', href: '/admin/addproducts' },
+        { id: 4, name: 'All Users', href: '/admin/users' }
+
     ]
 }
 

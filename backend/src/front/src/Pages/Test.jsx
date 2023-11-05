@@ -1,12 +1,19 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function Test () {
 
 
-    const [img, setImg] = useState('');
+    const [img, setImg] = useState(null);
+
+    useEffect(() => {
+        if(img){
+              console.log("File has been set.")
+      }
+    },[img]);
     
     const handleSubmit = event => {
+        console.log(img);
         event.preventDefault();
 
         const config = {
@@ -32,8 +39,8 @@ export default function Test () {
         <div>
             <form onSubmit={handleSubmit}>
                 <input type="file" accept="image/png, image/jpeg"
-                onChange={event => setImg(event.target.value)}
-                value={img}
+                onChange={event => setImg(event.target.files[0])}
+                value={""}
                 />
                 <button type="submit">submit</button>
             </form>

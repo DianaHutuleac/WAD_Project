@@ -23,6 +23,8 @@ services:
   f1_merch:
     build: ./
     container_name: f1_merch
+    volumes:
+      - app-data:/var/lib/data
     environment:
       - DB_SERVER:db
       - POSTGRES_DB=f1_merch
@@ -38,3 +40,4 @@ services:
 
 volumes:
   postgres_data:
+  app-data:

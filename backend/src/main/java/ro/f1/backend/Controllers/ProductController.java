@@ -8,10 +8,7 @@ import ro.f1.backend.Models.Product;
 import ro.f1.backend.Services.ProductService;
 
 //import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,25 +27,28 @@ public class ProductController {
         return hs;
     }
 
+    @GetMapping( path = "product/{id}")
+    public ResponseEntity<Optional> getProductById(@PathVariable Long id){
+        return new ResponseEntity<>(productService.getProduct(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "getAllProducts")
+    public HashMap<String, Object> getProductsAll(){
+        HashMap<String, Object> hs = new HashMap<>();
+        List<Product> products = productService.getProductsAll();
+        hs.put("products", products);
+        hs.put("length" , products.size());
+        return hs;
+    }
+
 
     @GetMapping( path = "teams")
-    public HashMap<String, Object> getProductsByTeamAndSession(
-            @RequestParam(name = "team") String team,
-            @RequestParam(defaultValue = "10") Integer items,
-            @RequestParam(defaultValue = "0") Integer page,
-            HttpServletRequest request){
-
-        List<String> messages = (List<String>) request.getSession().getAttribute("SESSION_STORE");
-
-        if ( messages == null){
-            messages = new ArrayList<>();
-        }
-
-        Map<Boolean, Long> countByType = messages.stream().collect(
-                Collectors.partitioningBy(
-                        (String msg) -> (msg.equals("O")), Collectors.counting() ));
-
-        return productService.getProductsByTeam(team,  items, page, countByType);
+    public HashMap<String, Object> getProductsByTeamName(@RequestParam(name = "team") String team){
+        HashMap<String, Object> hs = new HashMap<>();
+        List<Product> products = productService.getProductsByTeamName(team);
+        hs.put("products", products);
+        hs.put("length" , products.size());
+        return hs;
 
     }
 
@@ -56,6 +56,9 @@ public class ProductController {
     public ResponseEntity<String> add(@RequestBody Product addProductRequest){
         return  new ResponseEntity<String>(productService.add(addProductRequest), HttpStatus.OK);
     }
+
+
+
 
 
 }

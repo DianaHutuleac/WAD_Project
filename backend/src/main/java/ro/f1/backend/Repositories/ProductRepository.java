@@ -23,8 +23,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p from Product p where LOWER(p.b_clothestype) LIKE LOWER(CONCAT('%',:type,'%'))")
     List<Product> findProductsByB_Clothestype(@Param("type") String type);
 
-    @Query(value = "select p from Product p where LOWER(p.a_team)=lower(:team) order by p.f_arrival desc")
-    Page<Product> findProductByA_team(@Param("team") String team, Pageable paging);
+    @Query("select p from Product p where LOWER(p.a_team) LIKE LOWER(CONCAT('%',:type,'%'))")
+    List<Product> findProductsByA_team(@Param("type") String type);
+
+
 
     @Query(value = "select p from Product p where LOWER(p.f_arrival)=LOWER(:arrival) and LOWER(p.a_team)=LOWER(:team)")
     List<Product> findProductsByF_arrivalAndA_team(@Param("arrival") String arrival, @Param("team") String team);
