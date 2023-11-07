@@ -8,11 +8,17 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import {Buffer} from "buffer";
+import {addToCart} from "../Cart/cartReducer"
+import {useDispatch} from "react-redux"
 import React from "react";
 import { useState } from "react";
+import Notification from "../Elements/Notification";
 export default function ProductPage() {
     const location = useLocation();
     const [pathName, setPathName] = useState(null) ;
+
+    const dispatch = useDispatch()
+    const [quantity, setQuantity] = useState(1)
     
 
     const [img, setImg] = useState()
@@ -20,6 +26,9 @@ export default function ProductPage() {
     const [total, setTotal] = useState( 0);
     const [current, setCurrent ] = useState(0);
     const [products, setProducts ] = useState([]);
+
+    const [show, setShow] = useState(false)
+    const [message, setMessage] = useState('');
 
     React.useEffect(() => {
 
@@ -52,6 +61,18 @@ export default function ProductPage() {
 
     console.log(img)
 
+    function timeout(delay){
+        return new Promise(res => setTimeout(res, delay));
+    }
+    
+    
+       async function createNotification(message){
+        setShow(true)
+        setMessage(message)
+        await timeout(5000);
+        setShow(false)
+       }
+
 
     return(
         <div>
@@ -69,7 +90,7 @@ export default function ProductPage() {
                         <p className="font-titilium font-semibold text-md">{products.b_clothestype}</p>
                     </div>
                     <div>
-                        <p className="font-titilium font-semibold text-formula-red text-md">EUR {products.e_price}.00</p>
+                        <p className="font-titilium font-semibold text-formula-red text-md"> {products.e_price}</p>
                     </div>
                     <div>
                         <p className="text-sm">Size: {products.c_size}</p>
@@ -85,13 +106,21 @@ export default function ProductPage() {
                        
                     </div>
                     <Button
-                    buttonHref={"/cart"} 
                     buttonColor={"bg-formula-red"}
                     buttonLabel={"Add To Cart"}
                     buttonPadding={"px-32 py-3"}
                     buttonRadius={"rounded-md"}
                     labelColor={"text-formula-white"}
                     labelSize={"text-md"}
+                    onClick={()=>dispatch(addToCart({
+                        id:products?.id,
+                        team: products?.a_team,
+                        type:products?.b_clothestype,
+                        price:products?.e_price,
+                        size:products?.c_size,
+                        img:img,
+                        quantity,
+                      }),createNotification("Your cool product has been added to the cart!"))}
                     />
 
                     <div className="w-[21rem]">
@@ -116,7 +145,11 @@ export default function ProductPage() {
 
             </div>
         </div>
+
         <Footer />   
+        <Notification show={show} message={message} 
+    onClose={() => setShow(false)}
+    />
         </div>
     )
 }

@@ -2,33 +2,27 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom';
+import {useSelector} from "react-redux"
+import {resetCart} from "../Cart/cartReducer"
+import {useDispatch} from "react-redux"
+import { removeItem } from '../Cart/cartReducer'
 
-const products = [
-  {
-    id: 1,
-    name: 'Tshirt',
-    href: '#',
-    color: 'REDBULL',
-    price: '€ 48,75',
-    quantity: 1,
-    imageSrc: 'https://www.fuelforfans.com/dw/image/v2/BDWJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dwc4635b27/images/large/701224599001_pp_01_redbull.jpg',
-    imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-  },
-  /*{
-    id: 2,
-    name: 'Medium Stuff Satchel',
-    href: '#',
-    color: 'Blue',
-    price: '$32.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },*/
-  // More products...
-]
 
 export default function Cart() {
+  const products = useSelector(state=>state.cart.products)
+  const dispatch = useDispatch()
+
+  
+
+  const totalPrice = () => {
+    let total = 0
+    products.forEach((item) => {
+        total += item.quantity * parseFloat(item.price.replace("€","").replace(",", "."));
+    });
+    console.log(products)
+    return total.toFixed(2);
+}
+
   const [open, setOpen] = useState(true)
   const navigate = useNavigate();
   return (
@@ -86,7 +80,7 @@ export default function Cart() {
                               <li key={product.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={product.imageSrc}
+                                    src={`data:image/*;base64,${product.img}`}
                                     alt={product.imageAlt}
                                     className="h-full w-full object-cover object-center"
                                   />
@@ -96,7 +90,7 @@ export default function Cart() {
                                   <div>
                                     <div className="flex justify-between text-base font-formulafont-regular text-gray-900">
                                       <h3>
-                                        <a href={product.href}>{product.name}</a>
+                                        <a href={product.href}>{product.team} {product.type}</a>
                                       </h3>
                                       <p className="ml-4">{product.price}</p>
                                     </div>
@@ -109,6 +103,7 @@ export default function Cart() {
                                       <button
                                         type="button"
                                         className="font-formulafont-regular text-formula-red hover:formula-red"
+                                        onClick={() => dispatch(removeItem(product.id))}
                                       >
                                         Remove
                                       </button>
@@ -125,7 +120,7 @@ export default function Cart() {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-formulafont-regular text-gray-900">
                         <p>Subtotal</p>
-                        <p>€ 48,75</p>
+                        <p>€ {totalPrice()}</p>
                       </div>
                       <p className="mt-0.5 text-sm font-formulafont-regular text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">

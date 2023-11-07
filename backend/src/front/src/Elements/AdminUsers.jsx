@@ -3,21 +3,22 @@ import { useState } from "react";
 import { Card, Typography } from "@material-tailwind/react";
 import axios from "axios";
 
-const TABLE_HEAD = ["Id", "Team", "Type", "Size", "Image", "Price", "Arrival", ""];
+const TABLE_HEAD = ["Id", "First Name", "Last Name", "Username", "Email"];
+
 
  
-export function AdminProductsElement() {
+export function AdminUsersElement() {
   const [products, setProducts ] = useState([]);
 
 React.useEffect(() => {
 
-axios.get("http://localhost:8080/api/v1/getAllProducts").then(response => {setProducts(response.data.products) }).catch( err => console.log(err));
+axios.get("http://localhost:8080/api/v1/getAllUsers").then(response => {setProducts(response.data.products) }).catch( err => console.log(err));
 }, [])
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-40 ">
         <div className="h-full"></div>
-        <h1 className=" font-formulafont-bold text-formula-grey text-2xl">Products</h1>
+        <h1 className=" font-formulafont-bold text-formula-grey text-2xl">Users</h1>
         <div className="border-[6px] flex justify-center border-l-0 border-b-0 border-formula-red "></div>
     <Card className="h-full w-full overflow-scroll">
       <table className="w-full min-w-max table-auto text-left">
@@ -37,7 +38,8 @@ axios.get("http://localhost:8080/api/v1/getAllProducts").then(response => {setPr
           </tr>
         </thead>
         <tbody>
-          {products.map(({ id, a_team, b_clothestype, c_size, d_image, e_price, f_arrival}, index) => (
+
+          {products.map(({ id, firstName, lastName, username, email}, index) => (
             <tr key={id} className="even:bg-blue-gray-50/50">
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-formulafont-regular">
@@ -46,39 +48,25 @@ axios.get("http://localhost:8080/api/v1/getAllProducts").then(response => {setPr
               </td>
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-formulafont-regular">
-                  {a_team}
+                  {firstName}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-formulafont-regular">
-                  {b_clothestype}
+                  {lastName}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-formulafont-regular">
-                  {c_size}
+                  {username}
                 </Typography>
               </td>
               <td className="p-4">
                 <Typography variant="small" color="blue-gray" className="font-formulafont-regular">
-                  {d_image}
+                  {email}
                 </Typography>
               </td>
-              <td className="p-4">
-                <Typography variant="small" color="blue-gray" className="font-formulafont-regular">
-                  {e_price}
-                </Typography>
-              </td>
-              <td className="p-4">
-                <Typography variant="small" color="blue-gray" className="font-formulafont-regular">
-                  {f_arrival}
-                </Typography>
-              </td>
-              <td className="p-4">
-                <Typography as="a" href="#" variant="small" color="blue-gray" className="font-formulafont-regular">
-                  Edit
-                </Typography>
-              </td>
+              
             </tr>
           ))}
         </tbody>

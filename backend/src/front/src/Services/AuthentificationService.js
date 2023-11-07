@@ -4,7 +4,7 @@ import axios from "axios";
 const checkIfAuthenticated = (setUser, setAuth) => {
     // make an axios call
 
-    axios.get('http://localhost:8080/api/auth').then( response => {
+    axios.get('http://localhost:8080/api/auth', { withCredentials: true }).then( response => {
         console.log(response);
         if ( response.data.AUTHENTICATED === true){
             setAuth(true);

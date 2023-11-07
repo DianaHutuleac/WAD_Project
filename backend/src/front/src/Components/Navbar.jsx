@@ -1,17 +1,36 @@
 import Button from "../Elements/Buttons";
 import FormulaLogo from "../SVG/formula1";
-
+import {useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
+import {React} from "react";
 
  /* TODO: Correctly add the href to corespond to each page */
-const nav = {
-    pages: [
-        { id: 1, name: 'All Products', href: '/products' },
-        { id: 2, name: 'Teams', href: '/teams' },
-        { id: 3, name: 'Cart', href: '/cart' }
-    ]
-}
+
+
+
 
 export default function NavbarComponent() {
+
+
+    
+    const products = useSelector(state=>state.cart.products)
+    const dispatch = useDispatch()
+    const totalQuantity = () => {
+        let total = 0
+        products.forEach((item) => {
+            total += item.quantity
+        })
+        return total;
+    }
+
+    const nav = {
+        pages: [
+            { id: 1, name: 'All Products', href: '/products' },
+            { id: 2, name: 'Teams', href: '/teams' },
+            { id: 3, name: `Cart (${totalQuantity()})`, href: '/cart' }
+        ]
+    }
+
     return(
         <div className="bg-formula-red fixed w-screen z-50">
             <header className="relative">

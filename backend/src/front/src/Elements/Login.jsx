@@ -30,11 +30,11 @@ export default function LoginElement() {
         axios.post (LOGON_URI, params, config)
                 .then(response => {
                     console.log(response);
-                    if (response.status == 200) {
-                        window.location.href = "/home";
+                    if (response.status == 302) {
+                        window.location.href = "/";
                     }
                 })
-                .catch(err => console.log(err))
+                .catch(window.location.href = "/")
     }
 
     return (

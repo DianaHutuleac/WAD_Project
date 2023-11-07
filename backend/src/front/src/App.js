@@ -18,6 +18,7 @@ import Checkout from './Pages/Checkout';
 import AuthContext from "./context";
 import AuthService from "./Services/AuthentificationService"
 import TeamChoose from './Pages/TeamChoose';
+import Users from './Pages/Users';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
       <Route path = "checkout" element={<Checkout />} />
       <Route path = "admin" element={<Admin/>} />
       <Route path ="admin/orders" element={<Orders />} />
+      <Route path ="admin/users" element={<Users />} />
       <Route path ="admin/products" element={<AdminProducts />} />
       <Route path ="admin/addproducts" element={<AddProducts />} />
 

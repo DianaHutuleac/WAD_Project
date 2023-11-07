@@ -30,7 +30,7 @@ export default function ProductContent(props) {
                 {props.data.b_clothestype}
             </p>
             <p className="text-md font-titilium text-formula-red font-semibold ">
-                EUR {props.data.e_price}
+                 {props.data.e_price}
             </p>
         </a>
     )
